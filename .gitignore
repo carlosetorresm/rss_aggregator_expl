@@ -2,3 +2,5 @@
 rssag
 .env
 vendor/
+pgAdmin/
+postgres/

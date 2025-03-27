@@ -1,0 +1,28 @@
+services:
+  db:
+    container_name: postgres_database
+    image: postgres:latest
+    restart: always
+    volumes:
+      # - postgres-db:/var/lib/postgresql/data ejemplo
+      - ./postgres:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=123456
+
+  pgAdmin:
+    depends_on:
+      - db
+    image: dpage/pgadmin4
+    ports:
+      - "8082:80"
+    volumes:
+      - ./pgAdmin:/var/lib/pgadmin
+    environment:
+      - PGADMIN_DEFAULT_PASSWORD=123456
+      - PGADMIN_DEFAULT_EMAIL=superman@google.com
+
+volumes:
+  postgres-db:
+    external: true
